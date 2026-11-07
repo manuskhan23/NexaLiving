@@ -73,3 +73,19 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Release signing (never commit)
+android/keystore.properties
+
+# Local secrets and session notes
+/.env
+/.env.*
+/server/.env
+/server/.env.*
+/SESSION_NOTES.md
+/android/app/debug.keystore
+
+# Backend build and upload data
+/server/node_modules/
+/server/dist/
+/server/uploads/

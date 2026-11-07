@@ -1,0 +1,41 @@
+# Render Blueprint: New > Blueprint > pick this repo. Secrets (sync: false) are entered in the Render dashboard.
+services:
+  - type: web
+    name: nexaliving-api
+    runtime: node
+    region: singapore
+    plan: starter
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "24"
+      - key: MONGOMS_DISABLE_POSTINSTALL
+        value: "1"
+      - key: DEFAULT_TIMEZONE
+        value: Asia/Karachi
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_ACCESS_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: JWT_RESET_SECRET
+        sync: false
+      - key: ASSISTANCE_ENC_KEY
+        sync: false
+      - key: IMAGEKIT_PRIVATE_KEY
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: MAIL_FROM
+        sync: false

@@ -1,0 +1,22 @@
+import { Router } from 'express';
+import * as c from '../controllers/auth.controller';
+import { validate } from '../middleware/validate';
+import { authenticate } from '../middleware/authenticate';
+import { asyncHandler } from '../utils/asyncHandler';
+import * as v from '../validators/auth.validator';
+import { registerLimiter, loginLimiter, forgotLimiter, otpLimiter } from '../middleware/rateLimiters';
+
+const r = Router();
+r.post('/register', registerLimiter, validate(v.registerSchema), asyncHandler(c.register));
+r.post('/verify-signup-otp', otpLimiter, validate(v.verifySignupOtpSchema), asyncHandler(c.verifySignupOtp));
+r.post('/resend-signup-otp', otpLimiter, validate(v.resendSignupOtpSchema), asyncHandler(c.resendSignupOtp));
+r.post('/login', loginLimiter, validate(v.loginSchema), asyncHandler(c.login));
+r.post('/refresh', validate(v.refreshSchema), asyncHandler(c.refresh));
+r.post('/logout', authenticate, validate(v.logoutSchema), asyncHandler(c.logout));
+r.post('/logout-all', authenticate, asyncHandler(c.logoutAll));
+r.post('/forgot-password', forgotLimiter, validate(v.forgotSchema), asyncHandler(c.forgot));
+r.post('/verify-reset-otp', otpLimiter, validate(v.verifyOtpSchema), asyncHandler(c.verifyOtp));
+r.post('/reset-password', validate(v.resetSchema), asyncHandler(c.reset));
+r.patch('/change-password', authenticate, validate(v.changePasswordSchema), asyncHandler(c.changePassword));
+r.get('/me', authenticate, asyncHandler(c.me));
+export default r;

@@ -1,0 +1,249 @@
+NexaLiving Backend — Route Manifest
+==================================
+
+Base URL: http://localhost:5000/api/v1
+Format:   METHOD  PATH    Description
+
+### System  (2 routes)
+  GET    /api/v1/health
+  GET    /api/v1/meta/enums
+
+### Auth  (10 routes)
+  POST   /api/v1/auth/register
+  POST   /api/v1/auth/login
+  POST   /api/v1/auth/refresh
+  POST   /api/v1/auth/logout
+  POST   /api/v1/auth/logout-all
+  POST   /api/v1/auth/forgot-password
+  POST   /api/v1/auth/verify-reset-otp
+  POST   /api/v1/auth/reset-password
+  PATCH  /api/v1/auth/change-password
+  GET    /api/v1/auth/me
+
+### Users & Profile  (8 routes)
+  PATCH  /api/v1/users/me
+  PATCH  /api/v1/users/me/settings
+  PUT    /api/v1/users/me/avatar
+  DELETE /api/v1/users/me/avatar
+  POST   /api/v1/users/me/push-tokens
+  DELETE /api/v1/users/me/push-tokens/:token
+  DELETE /api/v1/users/me
+  GET    /api/v1/users/:userId
+
+### Societies & Membership  (18 routes)
+  GET    /api/v1/societies/mine
+  GET    /api/v1/societies/lookup
+  POST   /api/v1/societies/join
+  POST   /api/v1/societies
+  GET    /api/v1/societies/:societyId
+  PATCH  /api/v1/societies/:societyId
+  PATCH  /api/v1/societies/:societyId/settings
+  POST   /api/v1/societies/:societyId/join-code/regenerate
+  GET    /api/v1/societies/:societyId/members
+  GET    /api/v1/societies/:societyId/directory
+  PATCH  /api/v1/societies/:societyId/members/:membershipId/approve
+  PATCH  /api/v1/societies/:societyId/members/:membershipId/reject
+  PATCH  /api/v1/societies/:societyId/members/:membershipId/role
+  PATCH  /api/v1/societies/:societyId/members/:membershipId/permissions
+  PATCH  /api/v1/societies/:societyId/members/:membershipId/verify
+  PATCH  /api/v1/societies/:societyId/members/:membershipId/suspend
+  DELETE /api/v1/societies/:societyId/members/:membershipId
+  POST   /api/v1/societies/:societyId/leave
+
+### Notifications  (5 routes)
+  GET    /api/v1/notifications
+  GET    /api/v1/notifications/unread-count
+  PATCH  /api/v1/notifications/read-all
+  PATCH  /api/v1/notifications/:notificationId/read
+  DELETE /api/v1/notifications/:notificationId
+
+### Uploads  (2 routes)
+  POST   /api/v1/uploads/images
+  DELETE /api/v1/uploads/images/:publicId
+
+### Announcements  (6 routes)
+  GET    /api/v1/societies/:societyId/announcements
+  GET    /api/v1/societies/:societyId/announcements/:announcementId
+  POST   /api/v1/societies/:societyId/announcements
+  PATCH  /api/v1/societies/:societyId/announcements/:announcementId
+  PATCH  /api/v1/societies/:societyId/announcements/:announcementId/pin
+  DELETE /api/v1/societies/:societyId/announcements/:announcementId
+
+### Emergency Alerts  (6 routes)
+  POST   /api/v1/societies/:societyId/alerts
+  GET    /api/v1/societies/:societyId/alerts
+  GET    /api/v1/societies/:societyId/alerts/:alertId
+  POST   /api/v1/societies/:societyId/alerts/:alertId/acknowledge
+  GET    /api/v1/societies/:societyId/alerts/:alertId/acknowledgements
+  PATCH  /api/v1/societies/:societyId/alerts/:alertId/resolve
+
+### Tutor-Student Connect  (15 routes)
+  POST   /api/v1/societies/:societyId/tutors/profile
+  GET    /api/v1/societies/:societyId/tutors
+  GET    /api/v1/societies/:societyId/tutors/me
+  PATCH  /api/v1/societies/:societyId/tutors/me
+  PATCH  /api/v1/societies/:societyId/tutors/me/status
+  DELETE /api/v1/societies/:societyId/tutors/me
+  PATCH  /api/v1/societies/:societyId/tutors/:tutorId/verify
+  GET    /api/v1/societies/:societyId/tutors/:tutorId
+  POST   /api/v1/societies/:societyId/tutors/:tutorId/requests
+  GET    /api/v1/societies/:societyId/tutors/tutor-requests-removed/sent
+  GET    /api/v1/societies/:societyId/tutors/sent
+  GET    /api/v1/societies/:societyId/tutors/received
+  PATCH  /api/v1/societies/:societyId/tutors/:requestId/accept
+  PATCH  /api/v1/societies/:societyId/tutors/:requestId/reject
+  PATCH  /api/v1/societies/:societyId/tutors/:requestId/cancel
+
+### Tutor Requests  (5 routes)
+  GET    /api/v1/societies/:societyId/tutor-requests/sent
+  GET    /api/v1/societies/:societyId/tutor-requests/received
+  PATCH  /api/v1/societies/:societyId/tutor-requests/:requestId/accept
+  PATCH  /api/v1/societies/:societyId/tutor-requests/:requestId/reject
+  PATCH  /api/v1/societies/:societyId/tutor-requests/:requestId/cancel
+
+### Event Spaces  (15 routes)
+  POST   /api/v1/societies/:societyId/spaces
+  GET    /api/v1/societies/:societyId/spaces
+  GET    /api/v1/societies/:societyId/spaces/:spaceId
+  PATCH  /api/v1/societies/:societyId/spaces/:spaceId
+  DELETE /api/v1/societies/:societyId/spaces/:spaceId
+  POST   /api/v1/societies/:societyId/spaces/:spaceId/blackouts
+  DELETE /api/v1/societies/:societyId/spaces/:spaceId/blackouts/:blackoutId
+  GET    /api/v1/societies/:societyId/spaces/:spaceId/availability
+  POST   /api/v1/societies/:societyId/spaces/:spaceId/bookings
+  GET    /api/v1/societies/:societyId/spaces/mine
+  GET    /api/v1/societies/:societyId/spaces
+  GET    /api/v1/societies/:societyId/spaces/:bookingId
+  PATCH  /api/v1/societies/:societyId/spaces/:bookingId/approve
+  PATCH  /api/v1/societies/:societyId/spaces/:bookingId/reject
+  PATCH  /api/v1/societies/:societyId/spaces/:bookingId/cancel
+
+### Bookings  (6 routes)
+  GET    /api/v1/societies/:societyId/bookings/mine
+  GET    /api/v1/societies/:societyId/bookings
+  GET    /api/v1/societies/:societyId/bookings/:bookingId
+  PATCH  /api/v1/societies/:societyId/bookings/:bookingId/approve
+  PATCH  /api/v1/societies/:societyId/bookings/:bookingId/reject
+  PATCH  /api/v1/societies/:societyId/bookings/:bookingId/cancel
+
+### Items (Borrow/Give)  (15 routes)
+  POST   /api/v1/societies/:societyId/items
+  GET    /api/v1/societies/:societyId/items
+  GET    /api/v1/societies/:societyId/items/mine
+  GET    /api/v1/societies/:societyId/items/:itemId
+  PATCH  /api/v1/societies/:societyId/items/:itemId
+  PATCH  /api/v1/societies/:societyId/items/:itemId/status
+  DELETE /api/v1/societies/:societyId/items/:itemId
+  POST   /api/v1/societies/:societyId/items/:itemId/requests
+  GET    /api/v1/societies/:societyId/items/sent
+  GET    /api/v1/societies/:societyId/items/received
+  PATCH  /api/v1/societies/:societyId/items/:requestId/accept
+  PATCH  /api/v1/societies/:societyId/items/:requestId/reject
+  PATCH  /api/v1/societies/:societyId/items/:requestId/cancel
+  PATCH  /api/v1/societies/:societyId/items/:requestId/handover
+  PATCH  /api/v1/societies/:societyId/items/:requestId/return
+
+### Item Requests  (7 routes)
+  GET    /api/v1/societies/:societyId/item-requests/sent
+  GET    /api/v1/societies/:societyId/item-requests/received
+  PATCH  /api/v1/societies/:societyId/item-requests/:requestId/accept
+  PATCH  /api/v1/societies/:societyId/item-requests/:requestId/reject
+  PATCH  /api/v1/societies/:societyId/item-requests/:requestId/cancel
+  PATCH  /api/v1/societies/:societyId/item-requests/:requestId/handover
+  PATCH  /api/v1/societies/:societyId/item-requests/:requestId/return
+
+### Needs → Matches  (9 routes)
+  POST   /api/v1/societies/:societyId/needs
+  GET    /api/v1/societies/:societyId/needs/:needId/matches
+  GET    /api/v1/societies/:societyId/needs
+  GET    /api/v1/societies/:societyId/needs/mine
+  GET    /api/v1/societies/:societyId/needs/:needId
+  POST   /api/v1/societies/:societyId/needs/:needId/offers
+  PATCH  /api/v1/societies/:societyId/needs/:needId/offers/:offerId/accept
+  PATCH  /api/v1/societies/:societyId/needs/:needId/close
+  DELETE /api/v1/societies/:societyId/needs/:needId
+
+### House for Rent  (10 routes)
+  POST   /api/v1/societies/:societyId/rentals
+  GET    /api/v1/societies/:societyId/rentals
+  GET    /api/v1/societies/:societyId/rentals/mine
+  GET    /api/v1/societies/:societyId/rentals/:rentalId
+  PATCH  /api/v1/societies/:societyId/rentals/:rentalId
+  PATCH  /api/v1/societies/:societyId/rentals/:rentalId/status
+  DELETE /api/v1/societies/:societyId/rentals/:rentalId
+  PATCH  /api/v1/societies/:societyId/rentals/:rentalId/review
+  POST   /api/v1/societies/:societyId/rentals/:rentalId/inquiries
+  GET    /api/v1/societies/:societyId/rentals/:rentalId/inquiries
+
+### Local Services  (10 routes)
+  POST   /api/v1/societies/:societyId/services
+  GET    /api/v1/societies/:societyId/services/categories
+  GET    /api/v1/societies/:societyId/services
+  GET    /api/v1/societies/:societyId/services/:serviceId
+  PATCH  /api/v1/societies/:societyId/services/:serviceId
+  DELETE /api/v1/societies/:societyId/services/:serviceId
+  PATCH  /api/v1/societies/:societyId/services/:serviceId/review
+  POST   /api/v1/societies/:societyId/services/:serviceId/reviews
+  GET    /api/v1/societies/:societyId/services/:serviceId/reviews
+  DELETE /api/v1/societies/:societyId/services/:serviceId/reviews/:reviewId
+
+### Carpool  (12 routes)
+  POST   /api/v1/societies/:societyId/carpools
+  GET    /api/v1/societies/:societyId/carpools
+  GET    /api/v1/societies/:societyId/carpools/mine
+  GET    /api/v1/societies/:societyId/carpools/:rideId
+  PATCH  /api/v1/societies/:societyId/carpools/:rideId
+  PATCH  /api/v1/societies/:societyId/carpools/:rideId/cancel
+  POST   /api/v1/societies/:societyId/carpools/:rideId/requests
+  GET    /api/v1/societies/:societyId/carpools/sent
+  GET    /api/v1/societies/:societyId/carpools/received
+  PATCH  /api/v1/societies/:societyId/carpools/:requestId/accept
+  PATCH  /api/v1/societies/:societyId/carpools/:requestId/reject
+  PATCH  /api/v1/societies/:societyId/carpools/:requestId/cancel
+
+### Carpool Requests  (5 routes)
+  GET    /api/v1/societies/:societyId/carpool-requests/sent
+  GET    /api/v1/societies/:societyId/carpool-requests/received
+  PATCH  /api/v1/societies/:societyId/carpool-requests/:requestId/accept
+  PATCH  /api/v1/societies/:societyId/carpool-requests/:requestId/reject
+  PATCH  /api/v1/societies/:societyId/carpool-requests/:requestId/cancel
+
+### Nearby Doctors  (6 routes)
+  POST   /api/v1/societies/:societyId/doctors
+  GET    /api/v1/societies/:societyId/doctors/specialities
+  GET    /api/v1/societies/:societyId/doctors
+  GET    /api/v1/societies/:societyId/doctors/:doctorId
+  PATCH  /api/v1/societies/:societyId/doctors/:doctorId
+  DELETE /api/v1/societies/:societyId/doctors/:doctorId
+
+### Local Deals  (8 routes)
+  POST   /api/v1/societies/:societyId/deals
+  GET    /api/v1/societies/:societyId/deals/pending
+  GET    /api/v1/societies/:societyId/deals/mine
+  GET    /api/v1/societies/:societyId/deals
+  GET    /api/v1/societies/:societyId/deals/:dealId
+  PATCH  /api/v1/societies/:societyId/deals/:dealId
+  PATCH  /api/v1/societies/:societyId/deals/:dealId/review
+  DELETE /api/v1/societies/:societyId/deals/:dealId
+
+### Family Assistance  (7 routes)
+  POST   /api/v1/societies/:societyId/assistance
+  GET    /api/v1/societies/:societyId/assistance/mine
+  GET    /api/v1/societies/:societyId/assistance
+  GET    /api/v1/societies/:societyId/assistance/:requestId
+  PATCH  /api/v1/societies/:societyId/assistance/:requestId/status
+  POST   /api/v1/societies/:societyId/assistance/:requestId/notes
+  PATCH  /api/v1/societies/:societyId/assistance/:requestId/cancel
+
+### Reports & Moderation  (4 routes)
+  POST   /api/v1/societies/:societyId/reports
+  GET    /api/v1/societies/:societyId/reports/mine
+  GET    /api/v1/societies/:societyId/reports
+  PATCH  /api/v1/societies/:societyId/reports/resolve
+
+### Admin Dashboard  (2 routes)
+  GET    /api/v1/societies/:societyId/admin/stats
+  GET    /api/v1/societies/:societyId/admin/audit-logs
+
+==================================
+Total endpoints discovered: 193
