@@ -1,0 +1,21 @@
+import { Router } from 'express';
+import * as c from '../controllers/users.controller';
+import { authenticate } from '../middleware/authenticate';
+import { validate } from '../middleware/validate';
+import { asyncHandler } from '../utils/asyncHandler';
+import * as v from '../validators/users.validator';
+import { singleAvatar } from '../middleware/upload';
+import { adminCodeLimiter } from '../middleware/rateLimiters';
+
+const r = Router();
+r.use(authenticate);
+r.patch('/me', validate(v.updateProfileSchema), asyncHandler(c.updateProfile));
+r.patch('/me/settings', validate(v.updateSettingsSchema), asyncHandler(c.updateSettings));
+r.put('/me/avatar', singleAvatar, asyncHandler(c.setAvatar));
+r.post('/me/become-admin', adminCodeLimiter, validate(v.becomeAdminSchema), asyncHandler(c.becomeAdmin));
+r.delete('/me/avatar', asyncHandler(c.removeAvatar));
+r.post('/me/push-tokens', validate(v.pushTokenSchema), asyncHandler(c.addPushToken));
+r.delete('/me/push-tokens/:token', asyncHandler(c.removePushToken));
+r.delete('/me', validate(v.deleteAccountSchema), asyncHandler(c.deleteAccount));
+r.get('/:userId', validate({ params: v.userIdParamSchema.params, query: v.societyQuerySchema.query }), asyncHandler(c.getProfile));
+export default r;

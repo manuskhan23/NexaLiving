@@ -1,0 +1,51 @@
+import { Router } from 'express';
+import systemRoutes from './system.routes';
+import authRoutes from './auth.routes';
+import usersRoutes from './users.routes';
+import societyRoutes from './society.routes';
+import announcementRoutes from './announcement.routes';
+import notificationRoutes from './notification.routes';
+import uploadRoutes from './upload.routes';
+import alertRoutes from './alert.routes';
+import tutorRoutes, { tutorRequestsRouter } from './tutor.routes';
+import spaceRoutes, { bookingRoutes } from './space.routes';
+import itemRoutes, { itemRequestRoutes } from './item.routes';
+import needRoutes from './need.routes';
+import rentalRoutes from './rental.routes';
+import serviceRoutes from './service.routes';
+import carpoolRoutes, { carpoolRequestRoutes } from './carpool.routes';
+import doctorRoutes from './doctor.routes';
+import dealRoutes from './deal.routes';
+import assistanceRoutes from './assistance.routes';
+import reportRoutes from './report.routes';
+import adminRoutes from './admin.routes';
+
+const r = Router();
+r.use('/', systemRoutes);
+r.use('/auth', authRoutes);
+r.use('/users', usersRoutes);
+r.use('/societies', societyRoutes);
+r.use('/notifications', notificationRoutes);
+r.use('/uploads', uploadRoutes);
+
+// Society-scoped sub-routers
+r.use('/societies/:societyId/announcements', announcementRoutes);
+r.use('/societies/:societyId/alerts', alertRoutes);
+r.use('/societies/:societyId/tutors', tutorRoutes);
+r.use('/societies/:societyId/tutor-requests', tutorRequestsRouter);
+r.use('/societies/:societyId/spaces', spaceRoutes);
+r.use('/societies/:societyId/bookings', bookingRoutes);
+r.use('/societies/:societyId/items', itemRoutes);
+r.use('/societies/:societyId/item-requests', itemRequestRoutes);
+r.use('/societies/:societyId/needs', needRoutes);
+r.use('/societies/:societyId/rentals', rentalRoutes);
+r.use('/societies/:societyId/services', serviceRoutes);
+r.use('/societies/:societyId/carpools', carpoolRoutes);
+r.use('/societies/:societyId/carpool-requests', carpoolRequestRoutes);
+r.use('/societies/:societyId/doctors', doctorRoutes);
+r.use('/societies/:societyId/deals', dealRoutes);
+r.use('/societies/:societyId/assistance', assistanceRoutes);
+r.use('/societies/:societyId/reports', reportRoutes);
+r.use('/societies/:societyId/admin', adminRoutes);
+
+export default r;

@@ -1,0 +1,22 @@
+import { Request, Response } from 'express';
+import * as svc from '../services/society.service';
+import { ok, created } from '../utils/respond';
+
+export const createSociety = async (req: Request, res: Response) => created(res, await svc.createSociety((req as any).user._id, req.body));
+export const mine = async (req: Request, res: Response) => ok(res, { items: await svc.mySocieties((req as any).user._id) });
+export const lookup = async (req: Request, res: Response) => ok(res, { society: await svc.lookup(String(req.query.code)) });
+export const join = async (req: Request, res: Response) => created(res, { membership: await svc.join((req as any).user._id, req.body) });
+export const getOne = async (req: Request, res: Response) => ok(res, { society: await svc.getSociety(req.params.societyId, (req as any).membership), myMembership: (req as any).membership });
+export const updateSociety = async (req: Request, res: Response) => ok(res, { society: await svc.updateSociety(req.params.societyId, req.body, (req as any).user._id) });
+export const updateSettings = async (req: Request, res: Response) => ok(res, { settings: await svc.updateSettings(req.params.societyId, req.body, (req as any).user._id) });
+export const regenerate = async (req: Request, res: Response) => ok(res, { joinCode: await svc.regenerateJoinCode(req.params.societyId, (req as any).user._id) });
+export const listMembers = async (req: Request, res: Response) => { const { items, meta } = await svc.listMembers(req.params.societyId, req.query as any); return ok(res, { items }, undefined, meta); };
+export const directory = async (req: Request, res: Response) => { const { items, meta } = await svc.listDirectory(req.params.societyId, req.query as any, (req as any).user._id); return ok(res, { items }, undefined, meta); };
+export const approve = async (req: Request, res: Response) => ok(res, { membership: await svc.approveMembership(req.params.societyId, req.params.membershipId, (req as any).user._id, req.body.markVerified) });
+export const reject = async (req: Request, res: Response) => ok(res, { membership: await svc.rejectMembership(req.params.societyId, req.params.membershipId, (req as any).user._id, req.body.reason) });
+export const role = async (req: Request, res: Response) => ok(res, { membership: await svc.changeRole(req.params.societyId, req.params.membershipId, (req as any).user._id, req.body.role) });
+export const permissions = async (req: Request, res: Response) => ok(res, { membership: await svc.setPermissions(req.params.societyId, req.params.membershipId, (req as any).user._id, req.body.canReviewAssistance) });
+export const verify = async (req: Request, res: Response) => ok(res, { membership: await svc.verifyResident(req.params.societyId, req.params.membershipId, (req as any).user._id, req.body.isVerifiedResident, req.body.note) });
+export const suspend = async (req: Request, res: Response) => ok(res, { membership: await svc.suspendMember(req.params.societyId, req.params.membershipId, (req as any).user._id, req.body.suspended, req.body.reason) });
+export const remove = async (req: Request, res: Response) => ok(res, { membership: await svc.removeMember(req.params.societyId, req.params.membershipId, (req as any).user._id, req.body.reason) });
+export const leave = async (req: Request, res: Response) => { await svc.leave(req.params.societyId, (req as any).user._id); return ok(res, { message: 'Left' }); };
