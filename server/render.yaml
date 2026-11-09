@@ -4,7 +4,11 @@ services:
     name: nexaliving-api
     runtime: node
     region: singapore
+<<<<<<< HEAD
     plan: free
+=======
+    plan: starter
+>>>>>>> 93a1f9daa4912644765886edfc9ff372f42a24b2
     buildCommand: npm ci --include=dev && npm run build
     startCommand: npm start
     healthCheckPath: /api/v1/health

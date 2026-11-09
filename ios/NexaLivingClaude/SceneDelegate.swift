@@ -19,7 +19,11 @@ class SceneDelegate: RCTDefaultReactNativeFactoryDelegate, UIWindowSceneDelegate
     dependencyProvider = RCTAppDependencyProvider()
     reactNativeFactory = RCTReactNativeFactory(delegate: self)
     window = UIWindow(windowScene: windowScene)
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 93a1f9daa4912644765886edfc9ff372f42a24b2
     #if DEBUG
     let devMenuConfiguration = RCTDevMenuConfiguration(
       devMenuEnabled: true,
@@ -28,14 +32,22 @@ class SceneDelegate: RCTDefaultReactNativeFactoryDelegate, UIWindowSceneDelegate
     )
     reactNativeFactory?.devMenuConfiguration = devMenuConfiguration
     #endif
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 93a1f9daa4912644765886edfc9ff372f42a24b2
     reactNativeFactory?.startReactNative(
       withModuleName: "NexaLivingClaude",
       in: window,
       connectionOptions: connectionOptions
     )
 
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> 93a1f9daa4912644765886edfc9ff372f42a24b2
   }
 
   func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

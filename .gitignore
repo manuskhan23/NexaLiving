@@ -76,3 +76,19 @@ yarn-error.log
 
 # Release signing (never commit)
 android/keystore.properties
+<<<<<<< HEAD
+=======
+
+# Local secrets and session notes
+/.env
+/.env.*
+/server/.env
+/server/.env.*
+/SESSION_NOTES.md
+/android/app/debug.keystore
+
+# Backend build and upload data
+/server/node_modules/
+/server/dist/
+/server/uploads/
+>>>>>>> 93a1f9daa4912644765886edfc9ff372f42a24b2
